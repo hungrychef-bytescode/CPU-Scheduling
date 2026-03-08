@@ -6,7 +6,7 @@ A CPU scheduling simulator that demonstrates operating system scheduling algorit
 
 # Group Members
 
-- Janiola, Angel Mae
+- Janiola, Angel May
 - Verde, Myra
 
 ---
