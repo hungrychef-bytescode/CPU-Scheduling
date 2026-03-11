@@ -3,11 +3,25 @@
 
 #define MAX_PROCESSES 256
 #define MAX_SIMULATION_TIME 1000
+
+//enumerate scheduling algorithms
+//used to determine which algo to execute.
+typedef enum {
+    FCFS,
+    SJF
+    STCF,
+    RR,
+    MLFQ,
+    COMPARE
+} SchedulingAlgorithm;
+
 typedef struct {
     Process *processes;         //arr of all processes
     int num_processes;          //no. of processes
     int current_time;           //curr simulation time
     Process *current_process;   //track current running process
+
+    //add later depending on what's needed
 } SchedulerState; 
 
 int schedule_fcfs(SchedulerState *state);
