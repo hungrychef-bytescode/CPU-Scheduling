@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/process.h"
+#include "../include/parser.h"
 
 //parse cmd-line arguments to a CLIOptions struct
 //handles --algorithm, --input, --quantum, --processes, --compare, --mlfq-config
@@ -63,23 +64,36 @@ CLIOptions parse_args(int count, char *cmdarg[]) {
         }
     }
 
+    if (option.algorithm[0] == '\0' && !config.compare_all) {
+
+        fprintf(stderr, "Error: --algorithm is required (or use --compare)\n");
+        exit(1);
+    }
+
+    if (config.input_file[0] == '\0' && config.processes_str[0] == '\0') {
+        fprintf(stderr, "Error: --input or --processes is required\n");
+        exit(1);
+    }
+
     return option;
 }
 
-
 /*
- * parse_processes_string func -> parses inline process string from CLI
+ * parse_processes func -> parses inline process string from CLI
  * Format: "A:0:240,B:10:180,C:20:150"
  * Returns number of processes parsed
  */
-int parse_processes_string(const char *str, Process processes[], int max_processes) {
+int parse_processes(const char *str, Process processes[], int max_processes) {
     char buf[MAX_PROC_STR];
-    strncpy(buf, str, MAX_PROC_STR - 1);
+    snprintf(buf, sizeof(buf), "%s", str);
 
     int count = 0;
     char *token = strtok(buf, ",");
 
     while (token != NULL && count < max_processes) {
+
+        while (*token == ' ') token++;
+
         Process p = {0};
         p.start_time = -1;
 
