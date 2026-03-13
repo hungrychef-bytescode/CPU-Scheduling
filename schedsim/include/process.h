@@ -11,7 +11,7 @@ typedef struct {
     int remaining_time;             
     int start_time;                 //records first execution -> for Response Time calculation
     int finish_time;                //record completion time
-    int waiting_time;               
+    int waiting_time;            
 
     //for MLFQ
     int priority;

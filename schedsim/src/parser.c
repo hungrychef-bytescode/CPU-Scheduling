@@ -33,11 +33,12 @@ CLIOptions parse_args(int count, char *cmdarg[]) {
             else if (strcmp(algo, "RR") == 0) option.algorithm = RR;
             else if (strcmp(algo, "MLFQ") == 0) option.algorithm = MLFQ;
             else {
-                fprintf(stderr, "unknown algo: %s\n", algo)
+                fprintf(stderr, "unknown algo: %s \n", algo);
+                exit(1);
                 //exit smthn //handle
             }
 
-        } else if (strncmp(cmdarg[i], "--compare") == 0 ) {
+        } else if (strcmp(cmdarg[i], "--compare") == 0 ) {
             option.compare_all = true;
 
         } else if (strncmp(cmdarg[i], "--input=", 8) == 0) {
@@ -51,7 +52,7 @@ CLIOptions parse_args(int count, char *cmdarg[]) {
             long quantum = strtol(cmdarg[i] + 10, &end, 10);
 
             if (*end != '\0' || quantum <= 0) {
-                fprintf(stderror, "invalid number");
+                fprintf(stderr, "invalid number");
                 //exit
             } 
 
@@ -64,17 +65,21 @@ CLIOptions parse_args(int count, char *cmdarg[]) {
         }
     }
 
-    if (option.algorithm[0] == '\0' && !config.compare_all) {
-
+    if (!option.compare_all) {
         fprintf(stderr, "Error: --algorithm is required (or use --compare)\n");
         exit(1);
     }
 
-    if (config.input_file[0] == '\0' && config.processes_str[0] == '\0') {
+    if (option.input_file[0] == '\0' && option.processes_str[0] == '\0') {
         fprintf(stderr, "Error: --input or --processes is required\n");
         exit(1);
     }
 
+    printf("\n Algorithm: %d\n", option.algorithm);
+    printf("Processes string: %s\n", option.processes_str);
+    printf("Input file: %s\n", option.input_file);
+    printf("Quantum: %d\n", option.quantum);
+    printf("Compare all: %s\n", option.compare_all ? "true" : "false");
     return option;
 }
 
@@ -84,7 +89,7 @@ CLIOptions parse_args(int count, char *cmdarg[]) {
  * Returns number of processes parsed
  */
 int parse_processes(const char *str, Process processes[], int max_processes) {
-    char buf[MAX_PROC_STR];
+    char buf[MAX_PROCESS_STR];
     snprintf(buf, sizeof(buf), "%s", str);
 
     int count = 0;
