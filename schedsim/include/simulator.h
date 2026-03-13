@@ -1,6 +1,8 @@
 #ifndef SIMULATOR_H
 #define SIMULATOR_H
 
+#include "scheduler.h"
+
 typedef enum {
     EVENT_ARRIVAL,
     EVENT_COMPLETION,
@@ -9,10 +11,13 @@ typedef enum {
 } EventType;
 
 typedef struct Event {
-    int time;
-    EventType type;
-    Process *process;
-    struct Event *next
+    int time;                           //for arrival time
+    EventType type;                     //type-> if what kind of event
+    Process *process;                   //entire process
+    struct Event *next                  //points to the next event
 } Event;
+
+void simulator(SchedulerState *state, SchedulingAlgorithm algorithm);
+Event* initialize_events(SchedulerState *state);
 
 #endif
