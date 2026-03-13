@@ -26,7 +26,7 @@ Event* initialize_events(SchedulerState *state) {
     return queue;
 }
 
-//linsert a new event to the event queue -> linked list form
+//insert a new event to the event queue -> linked list form
 //LL is by order of arrival for the execution/simulation of the processes later
 // head: pointer to the head of event list
 // new_event: event node to insert in LL
@@ -54,5 +54,17 @@ void insert_event(Event **head, Event *new_event) {
     //or if reached the end of the LL:
     new_event->next = current->next;                           //point new event's next to the current's next
     current->next = new_event;                                 //set current's next node to be the new event
+}
 
+//removes an event from the queue's head
+Event* pop_event(Event **head){
+
+    if (*head == NULL) return NULL;
+
+    Event *popped_event = *head;                             //get the current head node
+
+    *head = (*head)->next;                                   //move to the next node and set it as head
+    popped_event->next = NULL;                               //remove/detach the popped_event in LL 
+
+    return popped_event;
 }
