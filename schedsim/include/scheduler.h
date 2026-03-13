@@ -9,6 +9,7 @@
 //enumerate scheduling algorithms
 //used to determine which algo to execute.
 typedef enum {
+    NONE,
     FCFS,
     SJF,
     STCF,

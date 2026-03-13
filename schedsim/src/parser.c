@@ -34,6 +34,7 @@ CLIOptions parse_args(int count, char *cmdarg[]) {
             else if (strcmp(algo, "MLFQ") == 0) option.algorithm = MLFQ;
             else {
                 fprintf(stderr, "unknown algo: %s \n", algo);
+                fprintf(stderr, "algo options: FCFS, SJF, STCF, RR, MLFQ \n");
                 exit(1);
                 //exit smthn //handle
             }
@@ -65,7 +66,7 @@ CLIOptions parse_args(int count, char *cmdarg[]) {
         }
     }
 
-    if (!option.compare_all) {
+    if (!option.compare_all && option.algorithm == NONE) {
         fprintf(stderr, "Error: --algorithm is required (or use --compare)\n");
         exit(1);
     }
