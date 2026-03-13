@@ -16,16 +16,18 @@ OBJ_DIR = obj
 # Source and header files
 SOURCES = $(SRC_DIR)/main.c \
           $(SRC_DIR)/parser.c \
-          $(SRC_DIR)/utils.c \
-          $(SRC_DIR)/fcfs.c \
-          $(SRC_DIR)/sjf.c \
-          $(SRC_DIR)/gantt.c \
-          $(SRC_DIR)/mlfq.c \
-          $(SRC_DIR)/metrics.c \
-          $(SRC_DIR)/stcf.c \
-          $(SRC_DIR)/rr.c
+#           $(SRC_DIR)/utils.c \
+#           $(SRC_DIR)/fcfs.c \
+#           $(SRC_DIR)/sjf.c \
+#           $(SRC_DIR)/gantt.c \
+#           $(SRC_DIR)/mlfq.c \
+#           $(SRC_DIR)/metrics.c \
+#           $(SRC_DIR)/stcf.c \
+#           $(SRC_DIR)/rr.c
 
-HEADERS = $(INC_DIR)/process.h
+HEADERS = $(INC_DIR)/process.h \
+		  $(INC_DIR)/scheduler.h \
+		  $(INC_DIR)/parser.h
 
 # Object files
 OBJECTS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SOURCES))
