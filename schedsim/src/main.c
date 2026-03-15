@@ -1,6 +1,7 @@
 #include <stdio.h>              //printf
 #include "parser.h"
 #include "scheduler.h"
+#include "../include/process.h"
 
 int main(int argc, char *argv[]) {              //gets cli count, arr of cli cmd
     
